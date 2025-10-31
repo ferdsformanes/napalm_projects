@@ -1,4 +1,5 @@
 from napalm import get_network_driver
+import json 
 
 # NX-OS device
 nxos_driver = get_network_driver('nxos')
@@ -6,8 +7,9 @@ nxos_device = nxos_driver(hostname='sbx-nxos-mgmt.cisco.com', username='admin', 
 nxos_device.open()
 nxos_facts = nxos_device.get_facts()
 nxos_device.close()
+
 print("NX-OS Device Facts:")
-print(nxos_facts)
+print(json.dumps(nxos_facts, indent=2))
 
 # IOS-XR device
 iosxr_driver = get_network_driver('iosxr')
@@ -15,5 +17,6 @@ iosxr_device = iosxr_driver(hostname='sandbox-iosxr-1.cisco.com', username='admi
 iosxr_device.open()
 iosxr_facts = iosxr_device.get_facts()
 iosxr_device.close()
+
 print("\nIOS-XR Device Facts:")
-print(iosxr_facts)
+print(json.dumps(iosxr_facts, indent=2))
